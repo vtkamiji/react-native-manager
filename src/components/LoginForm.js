@@ -6,6 +6,10 @@ import { emailChanged, passwordChanged, loginUser } from '../actions'
 
 class LoginForm extends Component {
 
+	componentWillMount() {		
+		this.props = {...this.props, email: 'teste@teste.com', password: 'teste1'};		
+	}	
+
 	onEmailChange(text) {
 		this.props.emailChanged(text);
 	}

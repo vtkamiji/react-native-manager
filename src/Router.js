@@ -4,30 +4,40 @@ import { Scene, Router, Actions } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
 import EmployeeList from './components/EmployeeList';
 import EmployeeCreate from './components/EmployeeCreate';
+import EmployeeEdit from './components/EmployeeEdit';
 
 const RouterComponent = () => {
 	return(
 		<Router>
 			<Scene key="root" hideNavBar>
 				<Scene key="auth">
-					<Scene key="login" component={LoginForm} title="Please Login" />
+					<Scene key="login" initial
+						component={LoginForm} 
+						title="Please Login">
+					</Scene>
 				</Scene>
-				<Scene key="main" initial>
+				<Scene key="main">
 					<Scene 
+						key="employeeList" 
 						rightTitle="Add"
 						onRight={() => Actions.employeeCreate()}
 						leftTitle=""
-						key="employeeList" 
 						component={EmployeeList}
-						title="Employees" 
-					/>
+						title="Employees">
+					</Scene>
 
 					<Scene
 						key="employeeCreate"
 						component={EmployeeCreate}
-						title="Create Employee"	
-					/>					
+						title="Create Employee">
+					</Scene>
+					<Scene
+						key="employeeEdit"
+						component={EmployeeEdit}
+						title="Edit Employee">
+					</Scene>
 				</Scene>
+
 			</Scene>
 		</Router>
 	);
