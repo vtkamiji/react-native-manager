@@ -21,14 +21,18 @@ class EmployeeEdit extends Component {
 		this.props.employeeSave({name, phone, shift, uid: this.props.employee.uid});		
 	}
 
-	onFirePress() {
-
-		//this.props.employeeDelete({uid: this.props.employee.uid});
-	}
-
 	onTextPress() {
 		const { phone, shift } = this.props;
 		Communications.text(phone, `Your upcoming shift is on ${shift}`);
+	}
+
+	onAccept() {
+		const { uid } = this.props.employee;
+		this.props.employeeDelete({ uid });
+	}
+
+	onDecline() {
+		this.setState({showModal: false});
 	}
 
 	render() {
@@ -50,7 +54,9 @@ class EmployeeEdit extends Component {
 						Fire Employee
 					</Button>					
 				</CardSection>
-				<Confirm visible={this.state.showModal}>
+				<Confirm visible={this.state.showModal}
+					onAccept={this.onAccept.bind(this)}
+					onDecline={this.onDecline.bind(this)}>
 					Are you sure you want to delete this?
 				</Confirm>
 				
